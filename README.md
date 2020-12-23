@@ -3,6 +3,8 @@
 
 [Trello](https://trello.com/b/oK1WjNdG/project-3)
 
+[ERD](https://lucid.app/lucidchart/invitations/accept/6b16b9ed-aa9e-46ed-a7b1-5bc2c02922f5)
+
 # Wireframes
 ![Home](/Wireframes/Home.png)
 ![SignUp](/Wireframes/signup.png)
@@ -13,3 +15,21 @@
 ![Details](/Wireframes/details.png)
 ![About](/Wireframes/about.png)
 ![NavBar](/Wireframes/NavBar.png)
+
+# Route Table
+
+CRUD Action | Route | Description
+----- | ----- | -----
+GET | / | Home
+GET | /signup | Sign up form
+GET | /login | Log in form
+GET | /dashboard | User dashboard
+GET | /search | Location search
+GET | /results | Search results (list)
+GET | /:id | Search result detail (one)
+GET | /about | About us page
+POST | /signup | submit sign up form
+POST | /login | submit login
+POST | /search | submit location search
+PUT | /dashboard | Edit dashboard/favorites (add favorites?)
+DELETE | /dashboard | Delete favorites
