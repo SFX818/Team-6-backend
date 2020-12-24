@@ -6,7 +6,7 @@ const db = {}
 db.mongoose = mongoose
 db.user = require('./user.model')
 db.role = require('./role.model')
-db.role = require('./location.model')
+db.location = require('./location.model')
 
 db.Roles = ['users', 'admin']
 
