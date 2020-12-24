@@ -18,4 +18,14 @@ module.exports = function(app) {
     app.get('/api/test/admin', [authJwt.verifyWebToken, authJwt.isAdmin],
     controller.adminBoard)
 
+    // Admin route to view all users
+    app.get('/admin/users/all', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findAllUsers)
+
+    // Admin routes to update user fields
+    app.get('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findUser)
+    app.put('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.updateUser)
+
+    // Admin route to delete users
+    app.delete('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
+
 }

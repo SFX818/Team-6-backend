@@ -23,16 +23,17 @@ CRUD Action | Route | Description
 GET | / | Home
 GET | /signup | Sign up form
 GET | /login | Log in form
-GET | /admin | Admin page
+GET | /admin/users/all | Admin page displaying all users
+GET | /admin/users/:id | Detail page for one user
 GET | /dashboard | User dashboard
 GET | /search | Location search
 GET | /results | Search results (list)
-GET | /:id | Search result detail (one)
+GET | /results/:id | Search result detail (one)
 GET | /about | About us page
 POST | /signup | submit sign up form
 POST | /login | submit login
-PUT | /admin | Edit user roles/data
+PUT | /admin/users/:id | Edit user roles/info
 POST | /search | submit location search
 PUT | /dashboard | Edit dashboard/favorites (add favorites?)
-DELETE | /admin | Delete users
+DELETE | /admin/users/:id | Delete a user
 DELETE | /dashboard | Delete favorites
