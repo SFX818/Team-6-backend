@@ -29,8 +29,6 @@ exports.findAllUsers = (req,res) => {
         })
 }
 
-
-
 // View one user's details
 exports.findUser = (req, res) => {
     const id = req.params.id
@@ -103,3 +101,10 @@ exports.deleteUser = (req,res) => {
         })
     })
 }
+
+// User Dashboard routes
+
+
+
+
+// DELETE // DELETE FAVORITES on Dashboard
