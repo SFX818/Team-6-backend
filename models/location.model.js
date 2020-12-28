@@ -5,7 +5,9 @@ const Location = mongoose.model(
     new mongoose.Schema({
         city: String,
         state: String,
-        country: String
+        country: String,
+        county: String,
+        zipcode: String
     })
 )
 
