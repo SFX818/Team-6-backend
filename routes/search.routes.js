@@ -23,6 +23,7 @@ module.exports = app => {
     // Retrieve all search locations
     router.get("/history", location.findAllSearchLocations);
 
+    // Api
     app.use('/api/location', router)
 }
 
