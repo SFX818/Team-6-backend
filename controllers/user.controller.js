@@ -1,3 +1,4 @@
+const { db } = require("../models/user.model")
 const User = require("../models/user.model")
 
 // Test routes
@@ -103,3 +104,62 @@ exports.deleteUser = (req,res) => {
         })
     })
 }
+
+
+// USER DASHBOARD ROUTES //
+
+// GET // View Favorite Locations
+exports.findAllFavoriteLocations = (req, res) => {
+    User.find({favoriteLocations}).then(data=>{
+        res.send(data)
+      })
+      .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
+      })
+}
+
+// GET // View Search Locations
+exports.findAllSearchLocations = (req, res) => {
+    User.find({searchLocations}).then(data=>{
+        res.send(data)
+      })
+      .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving search locations'
+        })
+      })
+}
+
+
+// PUT // Edit Primary Location
+exports.editPrimaryLocation = (req, res) => {
+    const id = req.body.id
+    User.findOne({
+        favoriteLocations: {
+            $elemMatch: {_id: id}
+        }
+    })
+    .then(data => {
+        if(!data)
+        return res.status(400).send({message: `Location with id: ${id} not found`})
+        else {
+            User.updateOne(
+                {_id: req.user.id},
+                {primaryLocation: data})
+        }
+    })
+    .then(data => {
+        if(!data)
+        return res.status(400).send({message: `User with id: ${id} not found`})
+        else return res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while updating primary location'
+        })
+      })
+}
+
+// DELETE // Delete from Favorite Locations

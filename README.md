@@ -25,7 +25,8 @@ GET | /signup | Sign up form
 GET | /login | Log in form
 GET | /admin/users/all | Admin page displaying all users
 GET | /admin/users/:id | Detail page for one user
-GET | /dashboard | User dashboard
+GET | /dashboard/favorites | User dashboard - favorites
+GET | /dashboard/history | User dashboard - search history
 GET | /search | Location search
 GET | /results | Search results (list)
 GET | /results/:id | Search result detail (one)
