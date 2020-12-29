@@ -30,8 +30,6 @@ exports.findAllUsers = (req,res) => {
         })
 }
 
-
-
 // View one user's details
 exports.findUser = (req, res) => {
     const id = req.params.id
@@ -125,17 +123,38 @@ exports.addToFavoriteLocations = (req, res) => {
     })
 }
 
+// GET // View User's info
+exports.viewProfile = (req,res) => {
+    User.findOne({_id: req.userId}).then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving user data'
+        })
+    })
+}
+
 
 // GET // View Favorite Locations
 exports.findAllFavoriteLocations = (req, res) => {
-    User.find({favoriteLocations}).then(data=>{
-        res.send(data)
-      })
-      .catch(err=>{
-        res.status(500).send({
-          message: err.message || 'An error occurred while retrieving favorite locations'
-        })
-      })
+    User.findOne({_id: req.userId})
+    //.then(data=>{
+        // res.send(data.favoriteLocations) // this works for ids
+   //   })
+   .populate('favoriteLocations')
+   .exec(function(err, user) {
+       if(err) {
+           return err
+        } else {
+            res.send(user.favoriteLocations)
+        }
+   })
+    .catch(err=>{
+    res.status(500).send({
+        message: err.message || 'An error occurred while retrieving favorite locations'
+    })
+    })
 }
 
 // GET // View Search Locations

@@ -13,7 +13,12 @@ const User = mongoose.model(
             }
         ],
         primaryLocation:String,
-        favoriteLocations:[],
+        favoriteLocations:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'Location'
+            }
+        ],
         searchLocations:[]
     })
 )
