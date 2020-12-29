@@ -108,6 +108,24 @@ exports.deleteUser = (req,res) => {
 
 // USER DASHBOARD ROUTES //
 
+// PUSH // Add location to favorites
+exports.addToFavoriteLocations = (req, res) => {
+    const id = req.params.id
+    User.updateOne(
+        {_id: req.userId},
+        {$addToSet: {favoriteLocations: id}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
+    })
+}
+
+
 // GET // View Favorite Locations
 exports.findAllFavoriteLocations = (req, res) => {
     User.find({favoriteLocations}).then(data=>{
@@ -146,7 +164,7 @@ exports.editPrimaryLocation = (req, res) => {
         return res.status(400).send({message: `Location with id: ${id} not found`})
         else {
             User.updateOne(
-                {_id: req.user.id},
+                {_id: req.userId},
                 {primaryLocation: data})
         }
     })

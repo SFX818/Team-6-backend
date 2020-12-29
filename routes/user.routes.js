@@ -32,6 +32,8 @@ module.exports = function(app) {
 
 
     // --- USER DASHBOARD ROUTES --- //
+    // Add location to favorites
+    app.post('/search/:id',[authJwt.verifyWebToken], controller.addToFavoriteLocations)
     // View favorite locations and search history
     app.get('/dashboard/favorites', [authJwt.verifyWebToken], controller.findAllFavoriteLocations)
     app.get('/dashboard/history', [authJwt.verifyWebToken], controller.findAllSearchLocations)
