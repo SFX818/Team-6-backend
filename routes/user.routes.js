@@ -49,4 +49,7 @@ module.exports = function(app) {
     // Edit primary location
     app.put('/dashboard/edit', [authJwt.verifyWebToken], controller.editPrimaryLocation)
 
+    // Remove a location from favorites
+    app.delete('/dashboard/favorites/remove', [authJwt.verifyWebToken], controller.removeFromFavorites)
+
 }

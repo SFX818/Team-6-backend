@@ -174,7 +174,7 @@ exports.findAllSearchLocations = (req, res) => {
    .populate('searchLocations')
    .exec(function(err, user) {
        if(err) {
-           return err
+           return res.status(400).send({message: `User with id: ${req.userId} not found`})
         } else {
             res.send(user.searchLocations)
         }
@@ -198,3 +198,17 @@ exports.editPrimaryLocation = (req, res) => {
 }
 
 // DELETE // Delete from Favorite Locations
+exports.removeFromFavorites = (req,res) => {
+    const id = req.body.id
+    User.findOneAndUpdate({_id: req.userId},
+        {$pull: {favoriteLocations: {_id: id}}},
+        {useFindAndModify:false, new:true}
+        )
+    .exec((err, user) => {
+        if(err)
+        return res.status(400).send({message: `${err}`})
+        else {
+            res.send(user)
+        }
+    })
+}
