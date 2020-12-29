@@ -12,7 +12,7 @@ const User = mongoose.model(
                 ref:'Role'
             }
         ],
-        primaryLocation:String,
+        primaryLocation:{},
         favoriteLocations:[
             {
                 type: mongoose.Schema.Types.ObjectId,

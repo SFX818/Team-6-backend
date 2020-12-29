@@ -41,10 +41,11 @@ module.exports = function(app) {
     // View user profile // ** May be deleted or combined with other routes later **
     app.get('/profile', [authJwt.verifyWebToken], controller.viewProfile)
 
-    
+
     // View favorite locations and search history
     app.get('/dashboard/favorites', [authJwt.verifyWebToken], controller.findAllFavoriteLocations)
     app.get('/dashboard/history', [authJwt.verifyWebToken], controller.findAllSearchLocations)
+    
     // Edit primary location
     app.put('/dashboard/edit', [authJwt.verifyWebToken], controller.editPrimaryLocation)
 

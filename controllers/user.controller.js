@@ -1,5 +1,6 @@
 const { db } = require("../models/user.model")
 const User = require("../models/user.model")
+const Location = require("../models/location.model")
 
 // Test routes
 exports.allAccess = (req,res) => {
@@ -183,30 +184,17 @@ exports.findAllSearchLocations = (req, res) => {
 // PUT // Edit Primary Location
 exports.editPrimaryLocation = (req, res) => {
     const id = req.body.id
-    User.findOne({
-        favoriteLocations: {
-            $elemMatch: {_id: id}
-        }
-    })
-    .then(data => {
-        if(!data)
+    Location.findOne({_id: id})
+    .exec((err, data) => {
+        if(err)
         return res.status(400).send({message: `Location with id: ${id} not found`})
         else {
             User.updateOne(
                 {_id: req.userId},
                 {primaryLocation: data})
+            res.send({message: 'Primary location update successful'})
         }
     })
-    .then(data => {
-        if(!data)
-        return res.status(400).send({message: `User with id: ${id} not found`})
-        else return res.send(data)
-    })
-    .catch(err=>{
-        res.status(500).send({
-          message: err.message || 'An error occurred while updating primary location'
-        })
-      })
 }
 
 // DELETE // Delete from Favorite Locations
