@@ -123,6 +123,24 @@ exports.addToFavoriteLocations = (req, res) => {
     })
 }
 
+// PUSH // Add location to search history (can have duplicates) // Want to limit array length to 20
+exports.addToSearchLocations = (req, res) => {
+    const id = req.params.id
+    User.updateOne(
+        {_id: req.userId},
+        {$push: {searchLocations: id}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving search locations'
+        })
+    })
+}
+
+
 // GET // View User's info
 exports.viewProfile = (req,res) => {
     User.findOne({_id: req.userId}).then(data => {
@@ -139,9 +157,6 @@ exports.viewProfile = (req,res) => {
 // GET // View Favorite Locations
 exports.findAllFavoriteLocations = (req, res) => {
     User.findOne({_id: req.userId})
-    //.then(data=>{
-        // res.send(data.favoriteLocations) // this works for ids
-   //   })
    .populate('favoriteLocations')
    .exec(function(err, user) {
        if(err) {
@@ -150,25 +165,20 @@ exports.findAllFavoriteLocations = (req, res) => {
             res.send(user.favoriteLocations)
         }
    })
-    .catch(err=>{
-    res.status(500).send({
-        message: err.message || 'An error occurred while retrieving favorite locations'
-    })
-    })
 }
 
 // GET // View Search Locations
 exports.findAllSearchLocations = (req, res) => {
-    User.find({searchLocations}).then(data=>{
-        res.send(data)
-      })
-      .catch(err=>{
-        res.status(500).send({
-          message: err.message || 'An error occurred while retrieving search locations'
-        })
-      })
+    User.findOne({_id: req.userId})
+   .populate('searchLocations')
+   .exec(function(err, user) {
+       if(err) {
+           return err
+        } else {
+            res.send(user.searchLocations)
+        }
+   })
 }
-
 
 // PUT // Edit Primary Location
 exports.editPrimaryLocation = (req, res) => {

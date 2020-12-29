@@ -19,7 +19,12 @@ const User = mongoose.model(
                 ref:'Location'
             }
         ],
-        searchLocations:[]
+        searchLocations:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'Location'
+            }
+        ]
     })
 )
 
