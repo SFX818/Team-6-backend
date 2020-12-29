@@ -1,12 +1,12 @@
+const location = require("../controllers/search.controller.js")
+let router = require("express").Router();
+
 module.exports = app => {
-    const location = require("../controllers/search.controller.js")
-    // Create a new Location
-    let router = require("express").Router();
     // Create a new Location
     router.post("/", location.create)
 
-     // Retrieve all Locations
-     router.get("/", location.findAll);
+    // Retrieve all Locations
+    router.get("/", location.findAll);
 
     // // Retrieve a single Location with id
     router.get("/:id", location.findOne);

@@ -6,15 +6,17 @@ const Location = db.location;
 // Create and Save a new Location
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.city) {
-        res.status(400).send({ message: "City can not be empty!" });
+    if (!req.body.zipcode) {
+        res.status(400).send({ message: 'Zipcode cannot be empty!' });
         return;
     }
     // Create a Location
   const location = new Location({
     city: req.body.city,
     state: req.body.state,
-    country: req.body.country
+    country: req.body.country,
+    county: req.body.county,
+    zipcode: req.body.zipcode
 });
     // Save Location in the database
     location
@@ -37,7 +39,7 @@ exports.findAll = (req,res) => {
     })
     .catch(err=>{
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving tutorials"
+        message: err.message || "Some error occurred while retrieving locations"
       })
     })
   }
