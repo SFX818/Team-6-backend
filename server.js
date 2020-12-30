@@ -34,6 +34,10 @@ app.get('/',(req,res)=>{
     res.json({message: 'Welcome to the jungle. We\'ve got fun and games'})
 })
 
+app.get('/about',(req,res)=>{
+    res.json({message: 'About Us page'})
+})
+
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
 require("./routes/search.routes")(app);

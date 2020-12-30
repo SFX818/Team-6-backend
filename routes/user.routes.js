@@ -29,11 +29,7 @@ module.exports = function(app) {
     app.put('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.updateUser)
     // Admin route to delete users
     app.delete('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
-
-
-    // --- USER DASHBOARD ROUTES --- //
-    // Add location to favorites
-    app.post('/search/:id',[authJwt.verifyWebToken], controller.addToFavoriteLocations)
+    
 
     // --- TEST ROUTES FOR PRE-API APP -- //
     // Add location to search history // **TEMPORARY - Will need refactoring with API **
@@ -41,6 +37,8 @@ module.exports = function(app) {
     // View user profile // ** May be deleted or combined with other routes later **
     app.get('/profile', [authJwt.verifyWebToken], controller.viewProfile)
 
+    
+    // --- USER DASHBOARD ROUTES --- //
 
     // View favorite locations and search history
     app.get('/dashboard/favorites', [authJwt.verifyWebToken], controller.findAllFavoriteLocations)
@@ -50,6 +48,9 @@ module.exports = function(app) {
     app.put('/dashboard/edit', [authJwt.verifyWebToken], controller.editPrimaryLocation)
 
     // Remove a location from favorites
-    app.delete('/dashboard/favorites/remove', [authJwt.verifyWebToken], controller.removeFromFavorites)
+    app.delete('/dashboard/favorites/remove/:id', [authJwt.verifyWebToken], controller.removeFromFavorites)
+
+    // Add location to favorites
+    app.post('/search/:id',[authJwt.verifyWebToken], controller.addToFavoriteLocations)
 
 }

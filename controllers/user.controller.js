@@ -198,17 +198,33 @@ exports.editPrimaryLocation = (req, res) => {
 }
 
 // DELETE // Delete from Favorite Locations
-exports.removeFromFavorites = (req,res) => {
-    const id = req.body.id
-    User.findOneAndUpdate({_id: req.userId},
-        {$pull: {favoriteLocations: {_id: id}}},
-        {useFindAndModify:false, new:true}
-        )
-    .exec((err, user) => {
-        if(err)
-        return res.status(400).send({message: `${err}`})
-        else {
-            res.send(user)
-        }
+// exports.removeFromFavorites = (req,res) => {
+//     const id = req.body.id
+//     User.findOneAndUpdate({_id: req.userId},
+//         {$pull: {favoriteLocations: {_id: id}}},
+//         {useFindAndModify:false, new:true}
+//         )
+//     .exec((err, user) => {
+//         if(err)
+//         return res.status(400).send({message: `${err}`})
+//         else {
+//             res.send(user)
+//         }
+//     })
+// }
+
+exports.removeFromFavorites = (req, res) => {
+    const id = req.params.id
+    User.updateOne(
+        {_id: req.userId},
+        {$pull: {favoriteLocations: id}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
     })
 }
