@@ -5,17 +5,6 @@
 
 [ERD](https://lucid.app/lucidchart/invitations/accept/6b16b9ed-aa9e-46ed-a7b1-5bc2c02922f5)
 
-# Wireframes
-![Home](/Wireframes/Home.png)
-![SignUp](/Wireframes/signup.png)
-![LogIn](/Wireframes/login.png)
-![Dashboard](/Wireframes/Dashboard.png)
-![Search](/Wireframes/search.png)
-![Results](/Wireframes/results.png)
-![Details](/Wireframes/details.png)
-![About](/Wireframes/about.png)
-![NavBar](/Wireframes/NavBar.png)
-
 # Route Table
 
 CRUD Action | Route | Description
