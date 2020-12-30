@@ -89,29 +89,3 @@ exports.delete = (req, res) => {
         }
 });
 };
-
-
-// Retrieve all Favorite Locations
-exports.findAllFavoriteLocations = (req, res) => {
-    db.user.find({favoriteLocations}).then(data=>{
-        res.send(data)
-      })
-      .catch(err=>{
-        res.status(500).send({
-          message: err.message || "Some error occurred while retrieving Locations"
-        })
-      })
-};
-
-
-// Retrieve all Search Locations
-exports.findAllSearchLocations = (req, res) => {
-    db.user.find({searchLocations}).then(data=>{
-        res.send(data)
-      })
-      .catch(err=>{
-        res.status(500).send({
-          message: err.message || "Some error occurred while retrieving Locations"
-        })
-      })
-};

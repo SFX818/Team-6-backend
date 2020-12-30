@@ -17,12 +17,6 @@ module.exports = app => {
     // // Delete a Location with id
     router.delete("/:id", location.delete);
 
-    // // Retrieve all favorite locations
-    router.get("/favorite", location.findAllFavoriteLocations);
-
-    // Retrieve all search locations
-    router.get("/history", location.findAllSearchLocations);
-
     // Api
     app.use('/api/location', router)
 }

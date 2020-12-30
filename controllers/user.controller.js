@@ -104,12 +104,6 @@ exports.deleteUser = (req,res) => {
     })
 }
 
-// User Dashboard routes
-
-
-
-
-// DELETE // DELETE FAVORITES on Dashboard
 
 // USER DASHBOARD ROUTES //
 
