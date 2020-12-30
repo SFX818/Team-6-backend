@@ -63,12 +63,9 @@ exports.update = (req, res) => {
     const id = req.params.id;
     // Find Location by the id being passed by id then update it
     Location.findByIdAndUpdate(id, {city: req.body.city, state: req.body.state, country: req.body.country}).then((data) => {
-        // if(!data){
-        //     res.status(400).send({message: "Not found Tutorial with id" + id});
-        // }else{
             res.send(data)
         
-})
+    })
 .catch((err) => {
     res.status(500).send({
         message: err.message || "Some error occurred while retrieving location"
