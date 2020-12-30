@@ -8,13 +8,13 @@ module.exports = app => {
     // Retrieve all Locations
     router.get("/", location.findAll);
 
-    // // Retrieve a single Location with id
+    // Retrieve a single Location with id
     router.get("/:id", location.findOne);
 
     // Update a location with id
     router.put("/:id", location.update);
 
-    // // Delete a Location with id
+    // Delete a Location with id
     router.delete("/:id", location.delete);
 
     // Api
