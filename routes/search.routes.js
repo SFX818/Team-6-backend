@@ -11,7 +11,7 @@ module.exports = app => {
     // Retrieve all Locations
     // router.get("/", location.findAll);
 
-    // // Retrieve a single Location with id
+    // Retrieve a single Location with id
     router.get("/:id", location.findOne);
 
     // Add to favorite locations

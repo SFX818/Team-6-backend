@@ -14,9 +14,19 @@ const User = mongoose.model(
                 ref:'Role'
             }
         ],
-        primaryLocation:'',
-        favoriteLocations: [],
-        searchLocations:[]
+        primaryLocation:{},
+        favoriteLocations:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'Location'
+            }
+        ],
+        searchLocations:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'Location'
+            }
+        ]
     })
 )
 

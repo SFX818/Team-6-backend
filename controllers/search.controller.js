@@ -64,15 +64,21 @@ exports.findOne = (req, res) => {
     });
 },
 
-// PUSH // Add location to favorites
-exports.addToFavoriteLocations = (req, res) => {
-    const id = req.params.id
-    User.updateOne(
-        {_id: req.userId},
-        {$addToSet: {favoriteLocations: id}}
-    )
-    .then(data => {
-        res.send(data)
+
+// Update a Location by the id in the request
+exports.update = (req, res) => {
+    const id = req.params.id;
+    // Find Location by the id being passed by id then update it
+    Location.findByIdAndUpdate(id, {city: req.body.city, state: req.body.state, country: req.body.country}).then((data) => {
+        // if(!data){
+        //     res.status(400).send({message: "Not found Tutorial with id" + id});
+        // }else{
+            res.send(data)
+        
+})
+.catch((err) => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving location"
     })
     .catch(err=>{
         res.status(500).send({
@@ -81,63 +87,15 @@ exports.addToFavoriteLocations = (req, res) => {
     })
 },
 
-
-// Add to Search Locations
-
-exports.addToSearchLocations = (req, res) => {
-    const id = req.params.id
-    User.updateOne(
-        {_id: req.userId},
-        {$push: {searchLocations: id}}
-    )
-    .then(data => {
-        res.send(data)
-    })
-    .catch(err=>{
-        res.status(500).send({
-          message: err.message || 'An error occurred while retrieving search locations'
-        })
-    })
-}
-
-
-
-
-
-
-
-
-
-
 // Delete a Location with the specified id in the request
-// exports.delete = (req, res) => {
-//     const id = req.params.id;
-//     // Find Location by the id being passed by id then remove it
-//     Location.findByIdAndRemove(id, {useFindAndModify: false}).then((data) => {
-//         if(!data){
-//             res.status(400).send({message: "Not found Location with id" + id});
-//         }else{
-//             res.send(data)
-//         }
-// });
-// };
-
-// Update a Location by the id in the request
-// exports.update = (req, res) => {
-//     const id = req.params.id;
-//     // Find Location by the id being passed by id then update it
-//     Location.findByIdAndUpdate(id, {city: req.body.city, state: req.body.state, country: req.body.country, county: req.body.county, zipcode: req.body.zipcode}).then((data) => {
-//         if(!data){
-//             res.status(400).send({message: "Not found Location with id" + id});
-//         }else{
-//             res.send(data)
-//         }
-        
-//     })
-//     .catch((err) => {
-//         res.status(500).send({
-//         message: err.message || "Some error occurred while retrieving location"
-//         })
-//     })
-
-// };
+exports.delete = (req, res) => {
+    const id = req.params.id;
+    // Find Location by the id being passed by id then remove it
+    Location.findByIdAndRemove(id, {useFindAndModify: false}).then((data) => {
+        if(!data){
+            res.status(400).send({message: "Not found Location with id" + id});
+        }else{
+            res.send(data)
+        }
+});
+}
