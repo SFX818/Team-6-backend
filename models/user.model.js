@@ -6,15 +6,13 @@ const User = mongoose.model(
         username:String,
         email:String,
         password:String,
-        zipcode:String,
-        county: String,
         roles: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref:'Role'
             }
         ],
-        primaryLocation:{},
+        primaryLocation: Object,
         favoriteLocations:[
             {
                 type: mongoose.Schema.Types.ObjectId,
