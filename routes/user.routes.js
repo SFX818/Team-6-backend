@@ -20,15 +20,17 @@ module.exports = function(app) {
     app.get('/api/test/admin', [authJwt.verifyWebToken, authJwt.isAdmin],
     controller.adminBoard)
 
-    // --- ADMIN ROUTES --- //
+    // --- ADMIN ROUTES --- 
+    
+    // *********** isAdmin is crashing the app
 
     // Admin route to view all users
     app.get('/admin/users/all', [authJwt.verifyWebToken], controller.findAllUsers)
     // Admin routes to update user fields
-    app.get('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findUser)
-    app.put('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.updateUser)
+    app.get('/admin/users/:id', [authJwt.verifyWebToken], controller.findUser)
+    app.put('/admin/users/:id', [authJwt.verifyWebToken], controller.updateUser)
     // Admin route to delete users
-    app.delete('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
+    app.delete('/admin/users/:id', [authJwt.verifyWebToken], controller.deleteUser)
     
 
     // --- TEST ROUTES FOR PRE-API APP -- //
