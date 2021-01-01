@@ -164,6 +164,18 @@ exports.findAllFavoriteLocations = (req, res) => {
    })
 }
 
+// GET // Primary Location
+exports.findPrimaryLocation = (req, res) => {
+    User.findOne({_id: req.userId})
+   .exec(function(err, user) {
+       if(err) {
+           return err
+        } else {
+            res.send(user.primaryLocation)
+        }
+   })
+}
+
 // GET // View Search Locations
 exports.findAllSearchLocations = (req, res) => {
     User.findOne({_id: req.userId})

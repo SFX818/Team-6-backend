@@ -45,6 +45,7 @@ module.exports = function(app) {
     // View favorite locations and search history
     app.get('/dashboard/favorites', [authJwt.verifyWebToken], controller.findAllFavoriteLocations)
     app.get('/dashboard/history', [authJwt.verifyWebToken], controller.findAllSearchLocations)
+    app.get('/dashboard/primary-location', [authJwt.verifyWebToken], controller.findPrimaryLocation)
     
     // Edit primary location
     app.put('/dashboard/edit', [authJwt.verifyWebToken], controller.editPrimaryLocation)
