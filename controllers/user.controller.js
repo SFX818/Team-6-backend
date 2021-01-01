@@ -1,4 +1,3 @@
-const { db } = require("../models/user.model")
 const User = require("../models/user.model")
 const Location = require("../models/location.model")
 
@@ -20,30 +19,27 @@ exports.adminBoard = (req, res) => {
 // View all users
 exports.findAllUsers = (req,res) => {
     User.find()
-        .then(data => {
-            res.send(data)
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                err.message || 'An error occurred while retrieving users'
-            })
-        })
+    .populate('roles')
+    .exec((err, data) => {
+        if(err) {
+            return err
+         } else {
+             res.send(data)
+         }
+    })
 }
 
 // View one user's details
 exports.findUser = (req, res) => {
     const id = req.params.id
-    User.findById(id).then(data => {
-        if(!data)
-        return res.status(400).send({message: `User with id:${id} not found`})
-        else return res.send(data)
-    })
-    .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || 'An error occurred while retrieving user'
-        })
+    User.findById(id)
+    .populate('roles')
+    .exec((err, data) => {
+        if(err) {
+            return err
+        } else {
+            res.send(data)
+        }
     })
 }
 
