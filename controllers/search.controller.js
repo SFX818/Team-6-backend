@@ -37,17 +37,19 @@ exports.findOrCreate = (req, res) => {
 
 }
 
-//find all location
+// find all location
+ master
 exports.findAll = (req,res) => {
     Location.find({county}).then(data=>{
       res.send(data)
     })
     .catch(err=>{
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving tutorials"
+        message: err.message || "Some error occurred while retrieving locations"
       })
     })
   },
+
 
     // Find a single Location with an id
 exports.findOne = (req, res) => {
@@ -61,7 +63,20 @@ exports.findOne = (req, res) => {
             }
     });
 },
-
+// Update a Location by the id in the request
+exports.update = (req, res) => {
+    const id = req.params.id;
+    // Find Location by the id being passed by id then update it
+    Location.findByIdAndUpdate(id, {city: req.body.city, state: req.body.state, country: req.body.country}).then((data) => {
+            res.send(data)
+        
+    })
+    .catch((err) => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving location"
+    })
+    })
+}
 // Delete a Location with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
@@ -73,5 +88,4 @@ exports.delete = (req, res) => {
             res.send(data)
         }
 });
-};
-
+}

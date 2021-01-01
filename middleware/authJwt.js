@@ -18,7 +18,7 @@ verifyWebToken = (req, res, next) => {
         if(err) {
             return res.status(401).send({message: 'Unauthorized'})
         }
-        req.userId = decoded.userId
+        req.userId = decoded.id
         next()
     })
 }
@@ -37,11 +37,11 @@ isAdmin = (req,res,next) => {
             if(err) {
                 return res.status(500).send({message: err})
             }
-            
+            console.log(user.roles, roles)
             for(let i = 0; i < roles.length; i++) {
-                if(roles[i].name === 'admin') {
+                if(roles[i].name === 'admin' || roles[i].name === 'ROLE_ADMIN') {
                     next()
-                    return
+                    return true
                 }
             }
 
