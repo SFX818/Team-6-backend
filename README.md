@@ -14,8 +14,10 @@ GET | /signup | Sign up form
 GET | /login | Log in form
 GET | /admin/users/all | Admin page displaying all users
 GET | /admin/users/:id | Detail page for one user
+GET | /admin/roles | Admin page displaying all roles
 GET | /dashboard/favorites | User dashboard - favorites
 GET | /dashboard/history | User dashboard - search history
+GET | /dashboard/primary-location | User's primary location
 GET | /search | Location search
 GET | /results | Search results (list)
 GET | /results/:id | Search result detail (one)

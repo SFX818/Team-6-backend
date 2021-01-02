@@ -26,7 +26,7 @@ verifyWebToken = (req, res, next) => {
 // Function to verify if user is admin or not
 
 isAdmin = (req,res,next) => {
-    User.findOne({username: req.body.username}).exec((err, user)=>{
+    User.findOne({_id: req.userId}).exec((err, user)=>{
         console.log(user)
         if(err) {
             return res.status(500).send({message:err})
@@ -37,11 +37,12 @@ isAdmin = (req,res,next) => {
             if(err) {
                 return res.status(500).send({message: err})
             }
-            console.log(user.roles, roles)
+            // console.log(user.roles, roles)
             for(let i = 0; i < roles.length; i++) {
-                if(roles[i].name === 'admin' || roles[i].name === 'ROLE_ADMIN') {
+                if(roles[i].name === 'admin') {
                     next()
-                    return true
+                    return
+                    //true
                 }
             }
 
