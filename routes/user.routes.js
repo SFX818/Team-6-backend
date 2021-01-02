@@ -25,13 +25,15 @@ module.exports = function(app) {
     // *********** isAdmin is crashing the app
 
     // Admin route to view all users
-    app.get('/admin/users/all', [authJwt.verifyWebToken], controller.findAllUsers)
+    app.get('/admin/users/all', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findAllUsers)
     // Admin routes to update user fields
-    app.get('/admin/users/:id', [authJwt.verifyWebToken], controller.findUser)
-    app.put('/admin/users/:id', [authJwt.verifyWebToken], controller.updateUser)
+    app.get('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findUser)
+    app.put('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.updateUser)
     // Admin route to delete users
-    app.delete('/admin/users/:id', [authJwt.verifyWebToken], controller.deleteUser)
+    app.delete('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
     
+    // Route to pull all roles
+    app.get('/admin/roles', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findRoles)
 
     // --- TEST ROUTES FOR PRE-API APP -- //
     // Add location to search history // **TEMPORARY - Will need refactoring with API **

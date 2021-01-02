@@ -1,5 +1,6 @@
 const User = require("../models/user.model")
 const Location = require("../models/location.model")
+const Role = require("../models/role.model")
 
 // Test routes
 exports.allAccess = (req,res) => {
@@ -40,6 +41,18 @@ exports.findUser = (req, res) => {
         } else {
             res.send(data)
         }
+    })
+}
+
+// Get all roles
+exports.findRoles = (req,res) => {
+    Role.find()
+    .exec((err, data) => {
+        if(err) {
+            return err
+         } else {
+             res.send(data)
+         }
     })
 }
 
