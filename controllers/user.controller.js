@@ -60,40 +60,47 @@ exports.findRoles = (req,res) => {
 exports.updateUser = (req, res) => {
     const id = req.params.id
     // this option allows admin to completely overwrite the user's roles
-    User.updateOne(
-        {_id:id},
-        {
-            username: req.body.username,
-            email: req.body.email,
-            roles: req.body.roles
-        })
-        .then(data => {
-            if(!data)
-            return res.status(400).send({message: `User with id: ${id} not found`})
-            else return res.send(data)
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                err.message || 'An error occurred while updating user'
-            })
-        })
+    // User.updateOne(
+    //     {_id:id},
+    //     {
+    //         username: req.body.username,
+    //         email: req.body.email,
+    //         roles: req.body.roles
+    //     })
+    //     .then(data => {
+    //         if(!data)
+    //         return res.status(400).send({message: `User with id: ${id} not found`})
+    //         else return res.send(data)
+    //     })
+    //     .catch(err => {
+    //         res.status(500).send({
+    //             message:
+    //             err.message || 'An error occurred while updating user'
+    //         })
+    //     })
     
     // this option pushes the new role into the array. Would need an additional function to remove roles without deleting user
 
-    // User.findById(id).then(data => {
-    //     if(!data) return res.status(400).send({message: `User with id:${id} not found`})
-    //     data.roles.push(req.body.roles)
-    //     data.save(err=>{
-    //         if(err) {
-    //             res.status(500).send({
-    //             message:
-    //             err.message || 'An error occurred while updating user'
-    //             })
-    //         }
-    //         res.send('User saved', data)
-    //     })
-    // })
+    User.findById(id)
+        .then(data => {
+            if(!data) return res.status(400).send({message: `User with id:${id} not found`})
+            data.roles.addToSet(req.body.roles)
+            data.save(err=>{
+                if(err) {
+                    res.status(500).send({
+                    message:
+                    err.message || 'An error occurred while updating user'
+                    })
+                }
+                res.send(data)
+        })
+        .catch(err=>{
+            res.status(500).send({
+              message: err.message || 'An error occurred while retrieving favorite locations'
+            })
+        })
+    })
+
 }
 
 // Delete a user
