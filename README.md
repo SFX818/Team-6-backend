@@ -24,8 +24,9 @@ GET | /results/:id | Search result detail (one)
 GET | /about | About us page
 POST | /signup | submit sign up form
 POST | /login | submit login
-PUT | /admin/users/:id | Edit user roles/info
 POST | /search | submit location search
+PUT | /admin/users/:id | Add a role to a user
+PUT | /admin/users/:id/remove | Remove a role from a user
 PUT | /dashboard | Edit dashboard/favorites (add favorites?)
 DELETE | /admin/users/:id | Delete a user
 DELETE | /dashboard | Delete favorites
