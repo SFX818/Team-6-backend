@@ -59,7 +59,7 @@ exports.findRoles = (req,res) => {
 // Add a role to a user
 exports.addUserRole = (req, res) => {
     const id = req.params.id
-    User.findById(id)
+    User.findByIdAndUpdate(id)
         .then(data => {
             if(!data) return res.status(400).send({message: `User with id:${id} not found`})
             data.roles.addToSet(req.body.roles)

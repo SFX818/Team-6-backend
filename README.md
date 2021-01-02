@@ -28,5 +28,5 @@ POST | /search | submit location search
 PUT | /admin/users/:id | Add a role to a user
 PUT | /admin/users/:id/remove | Remove a role from a user
 PUT | /dashboard | Edit dashboard/favorites (add favorites?)
-DELETE | /admin/users/:id | Delete a user
+DELETE | /admin/users/:id/delete | Delete a user
 DELETE | /dashboard | Delete favorites

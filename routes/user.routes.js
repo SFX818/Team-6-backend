@@ -26,12 +26,12 @@ module.exports = function(app) {
 
     // Admin route to view all users
     app.get('/admin/users/all', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findAllUsers)
-    // Admin routes to update user fields
+    // Admin routes to update user roles
     app.get('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findUser)
     app.put('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.addUserRole)
     app.put('/admin/users/:id/remove', [authJwt.verifyWebToken, authJwt.isAdmin], controller.removeUserRole)
     // Admin route to delete users
-    app.delete('/admin/users/:id', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
+    app.delete('/admin/users/:id/delete', [authJwt.verifyWebToken, authJwt.isAdmin], controller.deleteUser)
     
     // Route to pull all roles
     app.get('/admin/roles', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findRoles)
