@@ -38,7 +38,6 @@ exports.findOrCreate = (req, res) => {
 }
 
 // find all location
- master
 exports.findAll = (req,res) => {
     Location.find({county}).then(data=>{
       res.send(data)

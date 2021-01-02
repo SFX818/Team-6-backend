@@ -192,18 +192,31 @@ exports.findAllSearchLocations = (req, res) => {
 // PUT // Edit Primary Location
 exports.editPrimaryLocation = (req, res) => {
     const id = req.body.id
-    Location.findOne({_id: id})
-    .exec((err, data) => {
-        if(err)
-        return res.status(400).send({message: `Location with id: ${id} not found`})
-        else {
-            User.updateOne(
-                {_id: req.userId},
-                {primaryLocation: data})
-            res.send({message: 'Primary location update successful'})
-        }
+    const city = req.body.city
+    const state = req.body.state
+    const country = req.body.country
+    const county = req.body.county
+    User.updateOne(
+        {_id: req.userId},
+        {$set: {primaryLocation: {
+            _id: id,
+            city: city,
+            state: state,
+            country: country,
+            county: county
+        }}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
     })
 }
+
+
 
 // DELETE // Delete from Favorite Locations
 // exports.removeFromFavorites = (req,res) => {
