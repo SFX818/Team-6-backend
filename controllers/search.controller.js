@@ -7,9 +7,14 @@ const Location = db.location;
 // Query database for county and if it doesnt exist create a new location
 
 exports.findOrCreate = (req, res) => {
-    const location = req.body.county
+    const location = {
+        city: req.body.city,
+        state: req.body.state,
+        country: req.body.country,
+        county: req.body.county
+    }
     console.log(location)
-    Location.find({location}).then((data) =>{
+    Location.find(location).then((data) =>{
         console.log(data)
         if(data.length < 1) {
         // console.log("-----testing--")
