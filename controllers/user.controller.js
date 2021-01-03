@@ -1,5 +1,6 @@
 const User = require("../models/user.model")
 const Location = require("../models/location.model")
+const Role = require("../models/role.model")
 
 // Test routes
 exports.allAccess = (req,res) => {
@@ -43,45 +44,66 @@ exports.findUser = (req, res) => {
     })
 }
 
-// Update a user's details
-exports.updateUser = (req, res) => {
+// Get all roles
+exports.findRoles = (req,res) => {
+    Role.find()
+    .exec((err, data) => {
+        if(err) {
+            return err
+         } else {
+             res.send(data)
+         }
+    })
+}
+
+// Add a role to a user
+exports.addUserRole = (req, res) => {
     const id = req.params.id
-    // this option allows admin to completely overwrite the user's roles
-    User.updateOne(
-        {_id:id},
-        {
-            username: req.body.username,
-            email: req.body.email,
-            roles: req.body.roles
-        })
+    User.findByIdAndUpdate(id)
         .then(data => {
-            if(!data)
-            return res.status(400).send({message: `User with id: ${id} not found`})
-            else return res.send(data)
+            if(!data) return res.status(400).send({message: `User with id:${id} not found`})
+            data.roles.addToSet(req.body.roles)
+            data.save(err=>{
+                if(err) {
+                    res.status(500).send({
+                    message:
+                    err.message || 'An error occurred while updating user'
+                    })
+                }
+                res.send(data)
         })
-        .catch(err => {
+        .catch(err=>{
             res.status(500).send({
-                message:
-                err.message || 'An error occurred while updating user'
+              message: err.message || 'An error occurred while retrieving favorite locations'
             })
         })
-    
-    // this option pushes the new role into the array. Would need an additional function to remove roles without deleting user
+    })
 
-    // User.findById(id).then(data => {
-    //     if(!data) return res.status(400).send({message: `User with id:${id} not found`})
-    //     data.roles.push(req.body.roles)
-    //     data.save(err=>{
-    //         if(err) {
-    //             res.status(500).send({
-    //             message:
-    //             err.message || 'An error occurred while updating user'
-    //             })
-    //         }
-    //         res.send('User saved', data)
-    //     })
-    // })
 }
+
+exports.removeUserRole = (req,res) => {
+    const id = req.params.id
+    User.findById(id)
+    .then(data => {
+        if(!data) return res.status(400).send({message: `User with id:${id} not found`})
+        data.roles.pull(req.body.roles)
+        data.save(err=>{
+            if(err) {
+                res.status(500).send({
+                message:
+                err.message || 'An error occurred while updating user'
+                })
+            }
+            res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
+    })
+    })
+}
+
 
 // Delete a user
 exports.deleteUser = (req,res) => {
@@ -192,18 +214,31 @@ exports.findAllSearchLocations = (req, res) => {
 // PUT // Edit Primary Location
 exports.editPrimaryLocation = (req, res) => {
     const id = req.body.id
-    Location.findOne({_id: id})
-    .exec((err, data) => {
-        if(err)
-        return res.status(400).send({message: `Location with id: ${id} not found`})
-        else {
-            User.updateOne(
-                {_id: req.userId},
-                {primaryLocation: data})
-            res.send({message: 'Primary location update successful'})
-        }
+    const city = req.body.city
+    const state = req.body.state
+    const country = req.body.country
+    const county = req.body.county
+    User.updateOne(
+        {_id: req.userId},
+        {$set: {primaryLocation: {
+            _id: id,
+            city: city,
+            state: state,
+            country: country,
+            county: county
+        }}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving favorite locations'
+        })
     })
 }
+
+
 
 // DELETE // Delete from Favorite Locations
 // exports.removeFromFavorites = (req,res) => {
