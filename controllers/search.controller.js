@@ -1,5 +1,4 @@
 const db = require("../models");
-const User = require("../models/user.model")
 
 // grabs the location model from index where everything is brought together
 const Location = db.location;
@@ -44,7 +43,8 @@ exports.findOrCreate = (req, res) => {
 
 // find all location
 exports.findAll = (req,res) => {
-    Location.find({county}).then(data=>{
+    // Location.find({county}).then(data=>{
+    Location.find().then(data=>{  
       res.send(data)
     })
     .catch(err=>{
@@ -52,10 +52,9 @@ exports.findAll = (req,res) => {
         message: err.message || "Some error occurred while retrieving locations"
       })
     })
-  },
+  }
 
-
-    // Find a single Location with an id
+// Find a single Location with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
     // Find Location by the id being passed by id
@@ -66,7 +65,8 @@ exports.findOne = (req, res) => {
                 res.send(data)
             }
     });
-},
+}
+
 // Update a Location by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
@@ -81,6 +81,7 @@ exports.update = (req, res) => {
     })
     })
 }
+
 // Delete a Location with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
