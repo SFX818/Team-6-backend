@@ -37,14 +37,12 @@ module.exports = function(app) {
     app.get('/admin/roles', [authJwt.verifyWebToken, authJwt.isAdmin], controller.findRoles)
 
     // --- TEST ROUTES FOR PRE-API APP -- //
-    // Add location to search history // **TEMPORARY - Will need refactoring with API **
-    app.post('/search/history/:id',[authJwt.verifyWebToken], controller.addToSearchLocations)
     // View user profile // ** May be deleted or combined with other routes later **
     app.get('/profile', [authJwt.verifyWebToken], controller.viewProfile)
-
+    
     
     // --- USER DASHBOARD ROUTES --- //
-
+    
     // View favorite locations and search history
     app.get('/dashboard/favorites', [authJwt.verifyWebToken], controller.findAllFavoriteLocations)
     app.get('/dashboard/history', [authJwt.verifyWebToken], controller.findAllSearchLocations)
@@ -52,11 +50,13 @@ module.exports = function(app) {
     
     // Edit primary location
     app.put('/dashboard/edit/:id', [authJwt.verifyWebToken], controller.editPrimaryLocation)
-
-    // Remove a location from favorites
-    app.delete('/dashboard/favorites/remove/:id', [authJwt.verifyWebToken], controller.removeFromFavorites)
-
+    
     // Add location to favorites
     app.post('/search/:id',[authJwt.verifyWebToken], controller.addToFavoriteLocations)
-
+    
+    // Add location to search history
+    app.post('/api/location/search/:id',[authJwt.verifyWebToken], controller.addToSearchLocations)
+    
+    // Remove a location from favorites
+    app.delete('/dashboard/favorites/remove/:id', [authJwt.verifyWebToken], controller.removeFromFavorites)
 }

@@ -1,5 +1,4 @@
 const location = require("../controllers/search.controller.js")
-const { authJwt } = require('../middleware')
 
 module.exports = app => {
     

@@ -1,6 +1,5 @@
-const User = require("../models/user.model")
-const Location = require("../models/location.model")
-const Role = require("../models/role.model")
+const User = require('../models/user.model')
+const Role = require('../models/role.model')
 
 // Test routes
 exports.allAccess = (req,res) => {
@@ -81,6 +80,7 @@ exports.addUserRole = (req, res) => {
 
 }
 
+// Remove a role from a user
 exports.removeUserRole = (req,res) => {
     const id = req.params.id
     User.findById(id)
@@ -238,24 +238,7 @@ exports.editPrimaryLocation = (req, res) => {
     })
 }
 
-
-
-// DELETE // Delete from Favorite Locations
-// exports.removeFromFavorites = (req,res) => {
-//     const id = req.body.id
-//     User.findOneAndUpdate({_id: req.userId},
-//         {$pull: {favoriteLocations: {_id: id}}},
-//         {useFindAndModify:false, new:true}
-//         )
-//     .exec((err, user) => {
-//         if(err)
-//         return res.status(400).send({message: `${err}`})
-//         else {
-//             res.send(user)
-//         }
-//     })
-// }
-
+// DELETE // Remove a location from Favorites
 exports.removeFromFavorites = (req, res) => {
     const id = req.params.id
     User.updateOne(
