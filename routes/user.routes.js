@@ -51,12 +51,15 @@ module.exports = function(app) {
     // Edit primary location
     app.put('/dashboard/edit/:id', [authJwt.verifyWebToken], controller.editPrimaryLocation)
     
+    // Removes the location in index[0] in the searchLocations array
+    app.put('/dashboard/history/remove',[authJwt.verifyWebToken], controller.removeFromSearchLocations)
+    
     // Add location to favorites
     app.post('/search/:id',[authJwt.verifyWebToken], controller.addToFavoriteLocations)
     
     // Add location to search history
     app.post('/api/location/search/:id',[authJwt.verifyWebToken], controller.addToSearchLocations)
-    
+
     // Remove a location from favorites
     app.delete('/dashboard/favorites/remove/:id', [authJwt.verifyWebToken], controller.removeFromFavorites)
 }
