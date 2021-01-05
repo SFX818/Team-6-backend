@@ -159,6 +159,22 @@ exports.addToSearchLocations = (req, res) => {
     })
 }
 
+exports.removeFromSearchLocations = (req, res) => {
+    const id = req.params.id
+    User.updateOne(
+        {_id: req.userId},
+        {$pop: {searchLocations: -1}}
+    )
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err=>{
+        res.status(500).send({
+          message: err.message || 'An error occurred while retrieving search locations'
+        })
+    })
+}
+
 
 // GET // View User's info
 exports.viewProfile = (req,res) => {
