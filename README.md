@@ -24,9 +24,10 @@ GET | /results/:id | Search result detail (one)
 GET | /about | About us page
 POST | /signup | submit sign up form
 POST | /login | submit login
-POST | /search | submit location search
+POST | /api/location/search/:id | add location to searchLocations array
 PUT | /admin/users/:id | Add a role to a user
 PUT | /admin/users/:id/remove | Remove a role from a user
-PUT | /dashboard | Edit dashboard/favorites (add favorites?)
+PUT | /dashboard/edit/:id | Edit primary location
+PUT | /dashboard/history/remove | Removes the first element of the searchLocations array
 DELETE | /admin/users/:id/delete | Delete a user
 DELETE | /dashboard | Delete favorites
