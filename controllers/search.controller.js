@@ -22,7 +22,11 @@ exports.findOrCreate = (req, res) => {
                 state: req.body.state,
                 country: req.body.country,
                 county: req.body.county
-            });
+            })
+            .catch(err=>{
+                res.status(500).send({
+                message: err.message || "Some error occurred while retrieving location"
+            })
             // Save Location in the database
             location.save(location)
             .then((data) => {
