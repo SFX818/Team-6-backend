@@ -25,7 +25,7 @@ GET | /api/location/:id | View one location
 GET | /about | About us page
 POST | /api/auth/signup | submit sign up form
 POST | /api/auth/signin | submit login
-POST | /api/location | Location search - finds existing lcoation in local DB or creates a new one from external API
+POST | /api/location | Location search - finds existing location in local DB or creates a new one from external API
 POST | /api/location/search/:id | add location to searchLocations array
 PUT | /admin/users/:id | Add a role to a user
 PUT | /admin/users/:id/remove | Remove a role from a user
