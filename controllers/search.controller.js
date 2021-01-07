@@ -13,7 +13,8 @@ exports.findOrCreate = (req, res) => {
         county: req.body.county
     }
     console.log(location)
-    Location.find(location).then((data) =>{
+    Location.find(location)
+    .then((data) =>{
         console.log(data)
         if(data.length < 1) {
         // console.log("-----testing--")
@@ -22,11 +23,7 @@ exports.findOrCreate = (req, res) => {
                 state: req.body.state,
                 country: req.body.country,
                 county: req.body.county
-            })
-            .catch(err=>{
-                res.status(500).send({
-                message: err.message || "Some error occurred while retrieving location"
-            })
+            });
             // Save Location in the database
             location.save(location)
             .then((data) => {
@@ -41,6 +38,11 @@ exports.findOrCreate = (req, res) => {
             res.send(data)
         }
     
+    })
+    .catch(err=>{
+        res.status(500).send({
+        message: err.message || "Some error occurred while retrieving location"
+        })
     })
 
 }
