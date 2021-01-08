@@ -13,10 +13,10 @@ exports.signup = (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
-        primaryLocation: {"country": req.body.primaryLocation.country,
-                        "state": req.body.primaryLocation.state,
-                        "city": req.body.primaryLocation.city,
-                        "county": req.body.primaryLocation.county
+        primaryLocation: {'country': req.body.primaryLocation.country,
+                        'state': req.body.primaryLocation.state,
+                        'city': req.body.primaryLocation.city,
+                        'county': req.body.primaryLocation.county
                         }
     })
 

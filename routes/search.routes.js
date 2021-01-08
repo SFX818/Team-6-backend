@@ -1,23 +1,23 @@
-const location = require("../controllers/search.controller.js")
+const location = require('../controllers/search.controller.js')
 
 module.exports = app => {
     
-    let router = require("express").Router();
+    let router = require('express').Router();
 
     //  Create a new Location
-    router.post("/", location.findOrCreate)
+    router.post('/', location.findOrCreate)
 
     // Retrieve all Locations
-    router.get("/", location.findAll);
+    router.get('/', location.findAll);
 
     // Retrieve a single Location with id
-    router.get("/:id", location.findOne);
+    router.get('/:id', location.findOne);
 
     //Update a location with id
-    router.put("/:id", location.update);
+    router.put('/:id', location.update);
 
     // Delete a Location with id
-    router.delete("/:id", location.delete);
+    router.delete('/:id', location.delete);
     // Api
     app.use('/api/location', router)
 
