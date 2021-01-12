@@ -1,8 +1,6 @@
 # COV-ID
 ## Binary Beasts
 
-[Trello](https://trello.com/b/oK1WjNdG/project-3)
-
 [ERD](https://lucid.app/lucidchart/invitations/accept/6b16b9ed-aa9e-46ed-a7b1-5bc2c02922f5)
 
 [Front End Repo](https://github.com/SFX818/team-6-frontend)
