@@ -7,14 +7,6 @@
 
 [Back End Deployment](https://cov-id-backend.herokuapp.com/)
 
-BACKEND
-
-• explanation of backend tech used
-• general approach (a couple paragraphs)
-• installation instructions
-• table with RESTful routes & resources available at each endpoint
-• unsolved problems / major hurdles
-
 # Backend Technology Used
 - MongoDB/Mongoose
 - Node.js
@@ -24,7 +16,6 @@ BACKEND
 Since the majority of this app is in the frontend, we tried to keep the backend farily streamlined. We ended up creating CRUD routes for all the models, even though the location data was ultimately going to be supplied from an API search. Even though we didn't need all the routes we created in the finished product, it was helpful to have a quick way "in" to fix things.
 
 We knew it wouldn't make sense to save the Covid-19 statistics in our database since the data was constantly being updated, but we did want to store the locations as they were searched to improve the app's performance. We also of course created models for the user data and roles (Admin and User). We decided early in development that the Location model would be used for both the users' favoriteLocations and searchHistory, and that saved us from having to build an additional (and repetitive!) model.
-
 
 # Installation Instructions
 - Create a new directory and cd into it
